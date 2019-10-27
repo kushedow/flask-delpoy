@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import *
 app = Flask(__name__)
 
 @app.route('/')
@@ -7,7 +7,7 @@ def hello():
 
 @app.route('/about')
 def about():
-    return 'Now it should work!'
+    return render_template('about.html')
 
 if __name__ == '__main__':
     app.run()
