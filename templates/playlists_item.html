@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+    <div class="row mt-5">
+
+        <div class="col-8">
+
+            <nav class="mb-4"> <a href="/">Назад, на главную</a></nav>
+
+            <p>Плейлист: {{playlist.title}}</p>
+            <h2 class="mb-5">{{video.title}}</h2>
+
+            <iframe width="100%" height="400" src="https://www.youtube.com/embed/{{video['videoid']}}" frameborder="0" allow="picture-in-picture" allowfullscreen></iframe>
+
+            {% if video.id < playlist.videos|length-1  %}
+                <a href="/playlists/{{playlist.id}}/{{video.id+1}}" class="btn btn-primary">Следующее видео</a>
+            {% endif %}
+
+        </div>
+
+        <div class="col-3 offset-1">
+
+            <p class="mb-4 ">Всего {{playlist.videos|length}} видео </p>
+            {% for video in playlist.videos %}
+                <p><a href="/playlists/{{playlist.id}}/{{video.id}}">{{video.title}}</a> </p>
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}

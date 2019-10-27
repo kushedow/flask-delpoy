@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+        <nav class="mt-5 mb-3"><a href="/">Назад, на главную</a></nav>
+
+        <h2 class="mb-5 ">{{videos|length}} видео по тегу {{tag}}</h2>
+
+        <div class="row">
+
+            {% for video in videos %}
+                <div class="col-md-4">
+                    <div class="card mb-4" >
+                      <div class="card-body">
+                          <h5 class="card-title"><a href="/videos/{{video.id}}">{{video.title}}</a></h5>
+                        <p class="card-text">{{video.description|truncate(140)}}</p>
+                      </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+{% endblock %}
