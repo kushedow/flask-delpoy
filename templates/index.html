@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block container %}
+
+<h1 class="display-1 mt-5"><b>Stepik DIY</b></h1>
+<h2 class="display-4 mb-4">Обустраиваем дом, офис и мастерскую, делаем 200+ классных штук своими руками</h2>
+<p>А для вашего проекта вы можете выбрать любую тему</p>
+
+<img src="{{ url_for('static', filename='1.png') }}" alt="">
+
+<div class="mb-4 mt-5">
+    {% for tag in tags %}
+        <a class="btn btn-outline-primary mb-2 mr-2" href="/tags/{{tag}}" >#{{ tag }}</a>
+    {% endfor %}
+</div>
+
+<div class="row">
+
+    {% for playlist in playlists %}
+        <div class="col-md-4">
+            <div class="card mb-4" >
+              <div class="card-body">
+                  <a href="playlists/{{playlist.id}}">
+                      <img src="{{playlist.picture}}" alt="" class="img-fluid">
+                      <h5 class="card-title mt-3">{{playlist.title}}</h5>
+                      <p class="card-text">{{playlist.description|truncate(140)}}</p>
+                      <p class="card-text">{{playlist.videos|length}} видео</p>
+                  </a>
+              </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+<hr>
+
+<p><a href="/about">Получить информацию о проекте</a></p>
+
+{% endblock %}
