@@ -3,6 +3,16 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 import data as cfg
 
+def filter_by_tag(tag,videos):
+
+    result = []
+    for video in videos:
+        if tag in video["tags"]:
+            result.append(video)
+    return result
+
+''' Главная страничка '''
+
 @app.route('/')
 def hello():
 
@@ -11,6 +21,8 @@ def hello():
     tags = cfg.tags
 
     return render_template('index.html',playlists=playlists,videos=videos,tags=tags)
+
+''' Страничка плейлиста '''
 
 @app.route('/playlists/<list>/')
 @app.route('/playlists/<list>/<item>')
@@ -23,6 +35,27 @@ def playlists_item(list,item=0):
 
     return render_template('playlists_item.html', playlist=playlist, video=video)
 
+
+''' Страничка тега '''
+
+@app.route('/tags/<tag>')
+def tags_item(tag):
+
+    videos =  cfg.videos.values()
+    filtered = filter_by_tag(tag,videos)
+    return render_template('tags_item.html',tag=tag,videos=filtered)
+
+
+''' Одно видео '''
+
+@app.route('/videos/<id>')
+def videos_item(id):
+
+ video = cfg.videos.get(id)
+ return render_template('videos_item.html', video=video)
+
+
+''' Описание проекта '''
 
 @app.route('/about')
 def about():
