@@ -12,6 +12,17 @@ def hello():
 
     return render_template('index.html',playlists=playlists,videos=videos,tags=tags)
 
+@app.route('/playlists/<list>/')
+@app.route('/playlists/<list>/<item>')
+def playlists_item(list,item=0):
+
+    item = int(item)
+
+    playlist =  cfg.playlists[list]
+    video = playlist["videos"][item]
+
+    return render_template('playlists_item.html', playlist=playlist, video=video)
+
 
 @app.route('/about')
 def about():
