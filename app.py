@@ -5,7 +5,12 @@ import data as cfg
 
 @app.route('/')
 def hello():
-    return render_template('index.html')
+
+    videos = cfg.videos.values()
+    playlists = cfg.playlists.values()
+    tags = cfg.tags
+
+    return render_template('index.html',playlists=playlists,videos=videos,tags=tags)
 
 
 @app.route('/about')
