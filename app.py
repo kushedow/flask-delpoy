@@ -1,15 +1,18 @@
 from flask import *
+import data as cfg
+
 app = Flask(__name__)
 app.config['DEBUG'] = True
-import data as cfg
+
+''' Функция поиска '''
 
 def filter_by_tag(tag,videos):
 
-    result = []
+    found = []
     for video in videos:
         if tag in video["tags"]:
-            result.append(video)
-    return result
+            found.append(video)
+    return found
 
 ''' Главная страничка '''
 
